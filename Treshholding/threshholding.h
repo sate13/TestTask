@@ -3,15 +3,14 @@
 
 #include <QImage>
 
-class TreshHolding
+class ThreshHolding
 {
+    const QImage image;
 public:
-    TreshHolding(QImage _image)
+    ThreshHolding(QImage _image)
         :image(_image) {}
     bool generateThreshholding();
     QImage changeThreshhold(const int* _a);
-private:
-    const QImage image;
 };
 
 #endif // TRESHHOLDING_H

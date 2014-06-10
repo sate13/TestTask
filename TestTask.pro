@@ -3,7 +3,7 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    Treshholding/treshholding.cpp
+    Treshholding/threshholding.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +14,4 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    Treshholding/treshholding.h
+    Treshholding/threshholding.h
