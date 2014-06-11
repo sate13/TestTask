@@ -5,12 +5,12 @@
 
 class ThreshHolding
 {
-    const QImage originalImage;
+    QImage originalImage;
     QImage outputImage;
     int actualThreshhold;
 
 public:
-    ThreshHolding(QString _imageSource) {}
+    ThreshHolding(QString _imageSource);
     QImage changeThreshhold(const int _a);
 
 private:

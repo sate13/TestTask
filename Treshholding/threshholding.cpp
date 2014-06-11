@@ -2,7 +2,7 @@
 
 ThreshHolding::ThreshHolding(QString _imageSource) {
     //Das OriginalImage wird festegelegt über den Source.
-    originalImage = new QImage(_imageSource);
+    originalImage = QImage(_imageSource);
     generateThreshholding();
 }
 
@@ -18,7 +18,7 @@ QImage ThreshHolding::changeThreshhold(const int _a) {
     }
 
     // Neues OutputImage wird erstellt. Selbe Größe und Format wie das OriginalImage.
-    outputImage = *(new QImage(originalImage.size(), originalImage.format()));
+    outputImage = QImage(originalImage.size(), originalImage.format());
     actualThreshhold = _a;
     return outputImage;
 }
