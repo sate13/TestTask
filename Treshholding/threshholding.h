@@ -1,16 +1,20 @@
-#ifndef TRESHHOLDING_H
-#define TRESHHOLDING_H
+#ifndef THRESHHOLDING_H
+#define THRESHHOLDING_H
 
 #include <QImage>
 
 class ThreshHolding
 {
-    const QImage image;
+    const QImage originalImage;
+    QImage outputImage;
+    int actualThreshhold;
+
 public:
-    ThreshHolding(QImage _image)
-        :image(_image) {}
-    bool generateThreshholding();
-    QImage changeThreshhold(const int* _a);
+    ThreshHolding(QString _imageSource) {}
+    QImage changeThreshhold(const int _a);
+
+private:
+    int generateThreshholding();
 };
 
-#endif // TRESHHOLDING_H
+#endif // THRESHHOLDING_H
