@@ -8,6 +8,8 @@
 #include <QImage>
 #include <QSlider>
 #include <QLayout>
+#include <QFileDialog>
+#include <QMessageBox>
 
 class MainWindow : public QMainWindow
 {
@@ -16,12 +18,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
 
+private slots:
+    void open();
+
 private:
     void createAcions();
     void createMenu();
     void createSliderBar();
     void createImageField();
     void createStatusBar();
+
+    void loadImage(const QString& _source);
 
     QAction* exitAction;
     QAction* openFileAction;
