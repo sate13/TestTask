@@ -3,9 +3,10 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    Treshholding/threshholding.cpp
+    Treshholding/threshholding.cpp \
+    MainWindow/mainwindow.cpp
 
-RESOURCES += qml.qrc
+RESOURCES +=
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -14,4 +15,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    Treshholding/threshholding.h
+    Treshholding/threshholding.h \
+    MainWindow/mainwindow.h

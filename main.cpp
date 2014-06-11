@@ -1,12 +1,15 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 
+#include "MainWindow/mainwindow.h"
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setApplicationName("Probeaufgabe des CellTracker");
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    MainWindow mainWindow;
+    mainWindow.show();
 
     return app.exec();
 }
