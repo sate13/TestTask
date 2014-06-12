@@ -59,23 +59,26 @@ void MainWindow::createMenu() {
 
 void MainWindow::createToolBarElements() {
     label = new QLabel(this);
+//    label->setSizePolicy(QSizePolicy::Fixed);
+//    label->setText((QString) slider->value());
     label->setText("Hallo");
 
     slider = new QSlider();
     slider->setOrientation(Qt::Horizontal);
-    slider->setMaximum(1);
-    slider->setSingleStep(1);
+    slider->setMinimum(1);
     slider->setMaximum(255);
-    slider->setMaximumWidth(320);
+    slider->setValue(1);
+    slider->setSingleStep(1);
 
     button = new QPushButton();
+//    button->setSizePolicy(QSizePolicy::Fixed);
     button->setText("&Ok");
 }
 
 void MainWindow::createToolBar() {
     bottomToolBar = new QToolBar("SliderBar");
-    bottomToolBar->setLayoutDirection(Qt::LeftToRight);
 
+    bottomToolBar->setLayoutDirection(Qt::LeftToRight);
     bottomToolBar->setMovable(false);
 
     bottomToolBar->addWidget(label);
