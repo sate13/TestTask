@@ -6,16 +6,36 @@ MainWindow::MainWindow()
     setMinimumSize(480, 320);
     setWindowTitle("Probeaufgabe für Cell Tracker");
 
+    imageLabel = new QLabel;
+    imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    imageLabel->setScaledContents(true);
+
+    scrollArea = new QScrollArea;
+    scrollArea->setBackgroundRole(QPalette::Dark);
+    scrollArea->setWidget(imageLabel);
+
     createAcions();
     createMenu();
     createToolBarElements();
     createToolBar();
 
+    setCentralWidget(scrollArea);
     addToolBar(Qt::BottomToolBarArea, bottomToolBar);
 }
 
 void MainWindow::open() {
-    QString fileName = QFileDialog::getOpenFileName(this);
+    QString _fileName = QFileDialog::getOpenFileName(this,
+                                    tr("Öffne Datei"), QDir::currentPath());
+    if (!_fileName.isEmpty()) {
+        image = new QImage(_fileName);
+        if (image->isNull()) {
+            QMessageBox::information(this, tr("Image Viewer"),
+                                     tr("Cannot load %1.").arg(_fileName));
+            return;
+        }
+        imageLabel->setPixmap(QPixmap::fromImage(*image));
+        imageLabel->adjustSize();
+    }
 }
 
 void MainWindow::createAcions() {
@@ -61,16 +81,4 @@ void MainWindow::createToolBar() {
     bottomToolBar->addWidget(label);
     bottomToolBar->addWidget(slider);
     bottomToolBar->addWidget(button);
-}
-
-void MainWindow::loadImage(const QString& source) {
-    QImage _image (source);
-
-//    if(_image.isNull()) {
-//        QString _warningMessage = "Es gibt Probleme mit der Datei "
-//                                 + source;
-//        QMessageBox::warning(this, "Anwendung", _warningMessage);
-
-//        return;
-//    }
 }

@@ -10,10 +10,10 @@
 #include <QLayout>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QToolBar>
+#include <QScrollArea>
 
 class MainWindow : public QMainWindow
 {
@@ -33,17 +33,16 @@ private:
     void createImageField();
     void createStatusBar();
 
-    void loadImage(const QString& _source);
-
     QAction* exitAction;
     QAction* openFileAction;
 
     QMenu* fileMenu;
 
+    QScrollArea* scrollArea;
+    QLabel* imageLabel;
     QImage* image;
 
     QToolBar* bottomToolBar;
-    QBoxLayout* boxLayout;
     QLabel* label;
     QSlider* slider;
     QPushButton* button;
