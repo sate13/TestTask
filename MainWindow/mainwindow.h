@@ -10,6 +10,10 @@
 #include <QLayout>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QToolBar>
 
 class MainWindow : public QMainWindow
 {
@@ -24,7 +28,8 @@ private slots:
 private:
     void createAcions();
     void createMenu();
-    void createSliderBar();
+    void createToolBarElements();
+    void createToolBar();
     void createImageField();
     void createStatusBar();
 
@@ -34,6 +39,14 @@ private:
     QAction* openFileAction;
 
     QMenu* fileMenu;
+
+    QImage* image;
+
+    QToolBar* bottomToolBar;
+    QBoxLayout* boxLayout;
+    QLabel* label;
+    QSlider* slider;
+    QPushButton* button;
 };
 
 #endif // MAINWINDOW_H

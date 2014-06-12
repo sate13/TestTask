@@ -8,9 +8,10 @@ MainWindow::MainWindow()
 
     createAcions();
     createMenu();
-//    createImageField();
-//    createSliderBar();
-//    createStatusBar();
+    createToolBarElements();
+    createToolBar();
+
+    addToolBar(Qt::BottomToolBarArea, bottomToolBar);
 }
 
 void MainWindow::open() {
@@ -34,6 +35,32 @@ void MainWindow::createMenu() {
     fileMenu->addAction(openFileAction);
     fileMenu->addSeparator();
     fileMenu->addAction(exitAction);
+}
+
+void MainWindow::createToolBarElements() {
+    label = new QLabel(this);
+    label->setText("Hallo");
+
+    slider = new QSlider();
+    slider->setOrientation(Qt::Horizontal);
+    slider->setMaximum(1);
+    slider->setSingleStep(1);
+    slider->setMaximum(255);
+    slider->setMaximumWidth(320);
+
+    button = new QPushButton();
+    button->setText("&Ok");
+}
+
+void MainWindow::createToolBar() {
+    bottomToolBar = new QToolBar("SliderBar");
+    bottomToolBar->setLayoutDirection(Qt::LeftToRight);
+
+    bottomToolBar->setMovable(false);
+
+    bottomToolBar->addWidget(label);
+    bottomToolBar->addWidget(slider);
+    bottomToolBar->addWidget(button);
 }
 
 void MainWindow::loadImage(const QString& source) {
