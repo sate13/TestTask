@@ -1,8 +1,7 @@
 #include "threshholding.h"
 
-ThreshHolding::ThreshHolding(QString _imageSource) {
-    //Das OriginalImage wird festegelegt über den Source.
-    originalImage = QImage(_imageSource);
+ThreshHolding::ThreshHolding(QImage image) {
+    originalImage = image;
     generateThreshholding();
 }
 
@@ -11,7 +10,7 @@ int ThreshHolding::generateThreshholding() {
     return _actualThreshhold;
 }
 
-QImage ThreshHolding::changeThreshhold(const int _a) {
+QImage ThreshHolding::changeThreshhold(const QLabel& imageLabel, const int& _a) {
     // Altes OuptutImage wird aus dem Speicher gelöscht
     if(outputImage.isNull()) {
         outputImage.~QImage();

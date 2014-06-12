@@ -2,19 +2,21 @@
 #define THRESHHOLDING_H
 
 #include <QImage>
+#include <QLabel>
 
 class ThreshHolding
 {
+public:
+    ThreshHolding(QImage image);
+    QImage changeThreshhold(const QLabel& imageLabel, const int& _a);
+
+private:
+    int generateThreshholding();    
+
     QImage originalImage;
     QImage outputImage;
     int actualThreshhold;
 
-public:
-    ThreshHolding(QString _imageSource);
-    QImage changeThreshhold(const int _a);
-
-private:
-    int generateThreshholding();
 };
 
 #endif // THRESHHOLDING_H

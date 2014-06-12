@@ -27,15 +27,27 @@ void MainWindow::open() {
     QString _fileName = QFileDialog::getOpenFileName(this,
                                     tr("Öffne Datei"), QDir::currentPath());
     if (!_fileName.isEmpty()) {
-        image = new QImage(_fileName);
-        if (image->isNull()) {
+        inputImage = new QImage(_fileName);
+        outputImage = inputImage;
+        if (inputImage->isNull()) {
             QMessageBox::information(this, tr("Image Viewer"),
                                      tr("Cannot load %1.").arg(_fileName));
             return;
         }
-        imageLabel->setPixmap(QPixmap::fromImage(*image));
+        imageLabel->setPixmap(QPixmap::fromImage(*outputImage));
         imageLabel->adjustSize();
+
+//        if(&actualThreshHolding != nullptr) {
+//            actualThreshHolding.~ThreshHolding();
+//            &actualThreshHolding = nullptr;
+//        }
+        actualThreshHolding.~ThreshHolding();
+        actualThreshHolding = ThreshHolding(*inputImage);
     }
+}
+
+void MainWindow::changeThreshhold() {
+
 }
 
 void MainWindow::createAcions() {
@@ -48,6 +60,10 @@ void MainWindow::createAcions() {
     exitAction->setShortcut(QKeySequence::Quit);
     exitAction->setStatusTip("Beendet das Programm");
     connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+
+    changeThreshholdAction = new QAction("&Ok", bottomToolBar);
+    changeThreshholdAction->setStatusTip("Verändert den Schwellenwert");
+    connect(changeThreshholdAction, SIGNAL(triggered()), this, SLOT(changeThreshhold()));
 }
 
 void MainWindow::createMenu() {
@@ -59,8 +75,6 @@ void MainWindow::createMenu() {
 
 void MainWindow::createToolBarElements() {
     label = new QLabel(this);
-//    label->setSizePolicy(QSizePolicy::Fixed);
-//    label->setText((QString) slider->value());
     label->setText("Hallo");
 
     slider = new QSlider();
@@ -71,7 +85,6 @@ void MainWindow::createToolBarElements() {
     slider->setSingleStep(1);
 
     button = new QPushButton();
-//    button->setSizePolicy(QSizePolicy::Fixed);
     button->setText("&Ok");
 }
 

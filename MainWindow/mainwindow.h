@@ -15,6 +15,8 @@
 #include <QToolBar>
 #include <QScrollArea>
 
+#include <Treshholding/threshholding.h>
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,6 +26,7 @@ public:
 
 private slots:
     void open();
+    void changeThreshhold();
 
 private:
     void createAcions();
@@ -35,17 +38,21 @@ private:
 
     QAction* exitAction;
     QAction* openFileAction;
+    QAction* changeThreshholdAction;
 
     QMenu* fileMenu;
 
     QScrollArea* scrollArea;
     QLabel* imageLabel;
-    QImage* image;
+    QImage* inputImage;
+    QImage* outputImage;
 
     QToolBar* bottomToolBar;
     QLabel* label;
     QSlider* slider;
     QPushButton* button;
+
+    ThreshHolding actualThreshHolding;
 };
 
 #endif // MAINWINDOW_H
