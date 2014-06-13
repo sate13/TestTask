@@ -17,3 +17,5 @@ include(deployment.pri)
 HEADERS += \
     Treshholding/threshholding.h \
     MainWindow/mainwindow.h
+
+CXXFLAGS += -std=c++11

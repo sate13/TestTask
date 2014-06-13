@@ -1,23 +1,12 @@
 #include "threshholding.h"
 
-ThreshHolding::ThreshHolding(QImage image) {
-    originalImage = image;
-    generateThreshholding();
-}
+ThreshHolding::ThreshHolding(QImage* image)
+    : image(image) { }
 
-int ThreshHolding::generateThreshholding() {
-    int _actualThreshhold = 0;
-    return _actualThreshhold;
-}
-
-QImage ThreshHolding::changeThreshhold(const QLabel& imageLabel, const int& _a) {
-    // Altes OuptutImage wird aus dem Speicher gelöscht
-    if(outputImage.isNull()) {
-        outputImage.~QImage();
-    }
-
+QImage ThreshHolding::changeThreshhold(const int& _a) {
     // Neues OutputImage wird erstellt. Selbe Größe und Format wie das OriginalImage.
-    outputImage = QImage(originalImage.size(), originalImage.format());
+    QImage _outputImage = image->alphaChannel();
     actualThreshhold = _a;
-    return outputImage;
+
+    return _outputImage;
 }

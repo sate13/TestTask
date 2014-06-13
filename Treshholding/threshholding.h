@@ -6,15 +6,16 @@
 
 class ThreshHolding
 {
+
 public:
-    ThreshHolding(QImage image);
-    QImage changeThreshhold(const QLabel& imageLabel, const int& _a);
+    ThreshHolding() = default;
+    ThreshHolding(QImage* image);
+    QImage changeThreshhold(const int& _a);
 
 private:
-    int generateThreshholding();    
+    void generateThreshholding();
 
-    QImage originalImage;
-    QImage outputImage;
+    QImage* image;
     int actualThreshhold;
 
 };

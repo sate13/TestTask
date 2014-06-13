@@ -15,7 +15,7 @@
 #include <QToolBar>
 #include <QScrollArea>
 
-#include <Treshholding/threshholding.h>
+#include "Treshholding/threshholding.h"
 
 class MainWindow : public QMainWindow
 {

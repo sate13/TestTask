@@ -30,24 +30,29 @@ void MainWindow::open() {
         inputImage = new QImage(_fileName);
         outputImage = inputImage;
         if (inputImage->isNull()) {
-            QMessageBox::information(this, tr("Image Viewer"),
-                                     tr("Cannot load %1.").arg(_fileName));
+            QMessageBox::information(this, tr("Fehler"),
+                                     tr("Kann nicht\n%1\nladen.").arg(_fileName));
             return;
         }
         imageLabel->setPixmap(QPixmap::fromImage(*outputImage));
         imageLabel->adjustSize();
 
-//        if(&actualThreshHolding != nullptr) {
-//            actualThreshHolding.~ThreshHolding();
-//            &actualThreshHolding = nullptr;
-//        }
         actualThreshHolding.~ThreshHolding();
-        actualThreshHolding = ThreshHolding(*inputImage);
+        actualThreshHolding = ThreshHolding(inputImage);
     }
 }
 
 void MainWindow::changeThreshhold() {
-
+    if(inputImage->isNull()) {
+        QMessageBox::information(this, "Fehler",
+                                 "Es ist kein Bild vorhanden.");
+        return;
+    }
+    else {
+        QImage _outputImage = actualThreshHolding.changeThreshhold(slider->value());
+        imageLabel->setPixmap(QPixmap::fromImage(_outputImage));
+    }
+    imageLabel->adjustSize();
 }
 
 void MainWindow::createAcions() {
@@ -61,7 +66,7 @@ void MainWindow::createAcions() {
     exitAction->setStatusTip("Beendet das Programm");
     connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
 
-    changeThreshholdAction = new QAction("&Ok", bottomToolBar);
+    changeThreshholdAction = new QAction("&Ok", this);
     changeThreshholdAction->setStatusTip("Verändert den Schwellenwert");
     connect(changeThreshholdAction, SIGNAL(triggered()), this, SLOT(changeThreshhold()));
 }
@@ -75,17 +80,18 @@ void MainWindow::createMenu() {
 
 void MainWindow::createToolBarElements() {
     label = new QLabel(this);
-    label->setText("Hallo");
+//    label->setText(QString::number(slider->value()));
+    label->setText(("Slider->value()"));
 
     slider = new QSlider();
     slider->setOrientation(Qt::Horizontal);
-    slider->setMinimum(1);
+    slider->setMinimum(0);
     slider->setMaximum(255);
-    slider->setValue(1);
     slider->setSingleStep(1);
 
     button = new QPushButton();
     button->setText("&Ok");
+    connect(button, SIGNAL(clicked()), changeThreshholdAction, SLOT(trigger()));
 }
 
 void MainWindow::createToolBar() {
