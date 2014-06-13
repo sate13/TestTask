@@ -55,10 +55,6 @@ void MainWindow::changeThreshhold() {
     imageLabel->adjustSize();
 }
 
-void MainWindow::changeLabelValue() {
-    label->setNum(slider->value());
-}
-
 void MainWindow::createAcions() {
     openFileAction = new QAction("&Open...", this);
     openFileAction->setShortcuts(QKeySequence::Open);
@@ -89,11 +85,11 @@ void MainWindow::createToolBarElements() {
     slider->setMaximum(255);
     slider->setSingleStep(1);
     slider->setValue(0);
-    connect(slider, SIGNAL(valueChanged(int)), label, SLOT(setNum(int)));
 
     label = new QLabel(this);
     label->setFixedWidth(25);
     label->setNum(slider->value());
+    connect(slider, SIGNAL(valueChanged(int)), label, SLOT(setNum(int)));
 
     button = new QPushButton();
     button->setText("&Ok");
