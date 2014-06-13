@@ -27,6 +27,7 @@ public:
 private slots:
     void open();
     void changeThreshhold();
+    void changeLabelValue();
 
 private:
     void createAcions();
