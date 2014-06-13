@@ -1,3 +1,10 @@
+/**
+* @file mainwindow.h
+* @author Marc Satkowski
+* @date 13/06/2014
+* @version 1.0
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
