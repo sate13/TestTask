@@ -1,7 +1,7 @@
 /**
 * @file mainwindow.h
 * @author Marc Satkowski
-* @date 13/06/2014
+* @date 16/06/2014
 * @version 1.0
 */
 
@@ -21,8 +21,8 @@
 #include <QPushButton>
 #include <QToolBar>
 #include <QScrollArea>
-#include <QLineEdit>
 
+#include "MainWindow/textarea.h"
 #include "Treshholding/threshholding.h"
 
 class MainWindow : public QMainWindow
@@ -56,7 +56,7 @@ private:
     QImage* outputImage;
 
     QToolBar* bottomToolBar;
-    QLineEdit* textArea;
+    TextArea* textArea;
     QLabel* label;
     QSlider* slider;
     QPushButton* button;

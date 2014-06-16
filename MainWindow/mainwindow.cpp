@@ -1,7 +1,7 @@
 /**
 * @file mainwindow.cpp
 * @author Marc Satkowski
-* @date 13/06/2014
+* @date 16/06/2014
 * @version 1.0
 */
 
@@ -9,6 +9,8 @@
 
 MainWindow::MainWindow()
 {
+    inputImage = NULL;
+    outputImage = NULL;
     /* Setzen der Fenster Attribute */
     setMaximumSize(1024, 640);
     setMinimumSize(480, 320);
@@ -43,6 +45,9 @@ void MainWindow::open() {
      *  wenn nichts -> wird nichts ausgeführt
      * sonst -> wird ein neues Bild erstellt */
     if (!_fileName.isEmpty()) {
+        if(inputImage != NULL) {
+            inputImage->~QImage();
+        }
         inputImage = new QImage(_fileName);
         outputImage = inputImage;
         /* Abfrage ob es schon ein Bild gab:
@@ -63,9 +68,9 @@ void MainWindow::open() {
 }
 
 void MainWindow::changeThreshhold() {
-    /* Abfrage ob ein Image vorhanden ist und wenn ja, dann wird eine Fehler-
-     * meldung ausgespuckt */
-    if(inputImage->isNull()) {
+    /* Abfrage ob ein Image vorhanden ist und
+     * wenn ja -> dann wird eine Fehlermeldung ausgespuckt */
+    if(inputImage == NULL) {
         QMessageBox::information(this, "Fehler",
                                  "Es ist kein Bild vorhanden.");
         return;
@@ -115,11 +120,11 @@ void MainWindow::createToolBarElements() {
     slider->setValue(0);
 
     /* Erstellen der TextArea */
-    textArea = new QLineEdit();
+    textArea = new TextArea();
     textArea->setText(QString::number(slider->value()));
     textArea->setFixedWidth(30);
     textArea->setInputMask("999");
-    connect(slider, SIGNAL(valueChanged(int)), textArea, SLOT(setText(QString::number(int))));
+    connect(slider, SIGNAL(valueChanged(int)), textArea, SLOT(setNum(int)));
 
     /* Erstellen des Buttons */
     button = new QPushButton();
