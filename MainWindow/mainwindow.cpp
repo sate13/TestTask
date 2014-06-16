@@ -114,11 +114,12 @@ void MainWindow::createToolBarElements() {
     slider->setSingleStep(1);
     slider->setValue(0);
 
-    /* Erstellen des Labels */
-    label = new QLabel(this);
-    label->setFixedWidth(25);
-    label->setNum(slider->value());
-    connect(slider, SIGNAL(valueChanged(int)), label, SLOT(setNum(int)));
+    /* Erstellen der TextArea */
+    textArea = new QLineEdit();
+    textArea->setText(QString::number(slider->value()));
+    textArea->setFixedWidth(30);
+    textArea->setInputMask("999");
+    connect(slider, SIGNAL(valueChanged(int)), textArea, SLOT(setText(QString::number(int))));
 
     /* Erstellen des Buttons */
     button = new QPushButton();
@@ -134,7 +135,8 @@ void MainWindow::createToolBar() {
     bottomToolBar->setMovable(false);
 
     /* Hinzufügen der Elemente zu ToolBar */
-    bottomToolBar->addWidget(label);
+//    bottomToolBar->addWidget(label);
+    bottomToolBar->addWidget(textArea);
     bottomToolBar->addWidget(slider);
     bottomToolBar->addWidget(button);
 }

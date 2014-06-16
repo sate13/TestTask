@@ -21,6 +21,7 @@
 #include <QPushButton>
 #include <QToolBar>
 #include <QScrollArea>
+#include <QLineEdit>
 
 #include "Treshholding/threshholding.h"
 
@@ -55,6 +56,7 @@ private:
     QImage* outputImage;
 
     QToolBar* bottomToolBar;
+    QLineEdit* textArea;
     QLabel* label;
     QSlider* slider;
     QPushButton* button;
