@@ -71,8 +71,6 @@ void MainWindow::changeThreshhold() {
     /* Abfrage ob ein Image vorhanden ist und
      * wenn ja -> dann wird eine Fehlermeldung ausgespuckt */
     if(inputImage == NULL) {
-        QMessageBox::information(this, "Fehler",
-                                 "Es ist kein Bild vorhanden.");
         return;
     }
     /* Sonst wird die Funktion für die Schwellenwerte ausgeführt */
@@ -118,6 +116,7 @@ void MainWindow::createToolBarElements() {
     slider->setMaximum(255);
     slider->setSingleStep(1);
     slider->setValue(0);
+    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(changeThreshhold()));
 
     /* Erstellen der TextArea */
     textArea = new TextArea();
@@ -125,11 +124,6 @@ void MainWindow::createToolBarElements() {
     textArea->setFixedWidth(30);
     textArea->setInputMask("999");
     connect(slider, SIGNAL(valueChanged(int)), textArea, SLOT(setNum(int)));
-
-    /* Erstellen des Buttons */
-    button = new QPushButton();
-    button->setText("&Ok");
-    connect(button, SIGNAL(clicked()), changeThreshholdAction, SLOT(trigger()));
 }
 
 void MainWindow::createToolBar() {
@@ -140,8 +134,6 @@ void MainWindow::createToolBar() {
     bottomToolBar->setMovable(false);
 
     /* Hinzufügen der Elemente zu ToolBar */
-//    bottomToolBar->addWidget(label);
     bottomToolBar->addWidget(textArea);
     bottomToolBar->addWidget(slider);
-    bottomToolBar->addWidget(button);
 }
