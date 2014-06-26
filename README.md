@@ -1,4 +1,4 @@
-Schwellenwertberehner
+Schwellenwertberechner
 ========
 
 Geschrieben in C++ mit Qt Einbindung.
