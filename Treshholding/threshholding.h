@@ -28,7 +28,7 @@ public:
     void setThreshhold(const int& threshhold);
 
 public slots:
-    QImage changeThreshhold(QLabel& imageLabel, const int& _a);
+    void changeThreshholdImage(QImage image);
 
 signals:
     void imageChanged();

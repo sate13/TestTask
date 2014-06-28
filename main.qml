@@ -56,11 +56,11 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             implicitWidth: 320
-            minimumValue: 1
+            minimumValue: 0
             maximumValue: 255
             stepSize: 1
+            onValueChanged: threshHolding.changeThreshholdImage(image)
         }
-        Button { text: "OK" }
     }    
 
     statusBar: StatusBar {
@@ -74,6 +74,7 @@ ApplicationWindow {
 
     Threshholding {
         id: threshHolding
-
+        threshhold: slider.value
+        image: image
     }
 }

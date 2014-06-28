@@ -26,10 +26,9 @@ void ThreshHolding::setThreshhold(const int &threshhold) {
 ThreshHolding::ThreshHolding(QImage* image)
     : threshholdImage(image) { }
 
-QImage ThreshHolding::changeThreshhold(QLabel& imageLabel, const int& _a) {
+void ThreshHolding::changeThreshholdImage(QImage image) {
     /* Erstellen des neuen Outputbildes und Ändern des Schwellenwertes */
     QImage _outputImage = *threshholdImage;
-    actualThreshhold = _a;
 
     /* Schleifen zum Iterieren über alle Pixel des Bildes */
     for (int _w = 0; _w < threshholdImage->width(); _w++) {
@@ -47,6 +46,7 @@ QImage ThreshHolding::changeThreshhold(QLabel& imageLabel, const int& _a) {
             }
         }
     }
+    image = _outputImage;
 
-    return _outputImage;
+    emit imageChanged();
 }
