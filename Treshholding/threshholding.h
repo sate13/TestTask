@@ -8,21 +8,36 @@
 #ifndef THRESHHOLDING_H
 #define THRESHHOLDING_H
 
+#include <QObject>
 #include <QImage>
 #include <QLabel>
 
-class ThreshHolding
+class ThreshHolding : public QObject
 {
+    Q_OBJECT
+    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
+    Q_PROPERTY(int threshhold READ threshhold WRITE setThreshhold NOTIFY threshholdChanged)
 
 public:
     ThreshHolding() = default;
     ThreshHolding(QImage* image);
-    QImage changeThreshhold(const int& _a);
+
+    QImage image() const;
+    void setImage(const QImage& image);
+    int threshhold() const;
+    void setThreshhold(const int& threshhold);
+
+public slots:
+    QImage changeThreshhold(QLabel& imageLabel, const int& _a);
+
+signals:
+    void imageChanged();
+    void threshholdChanged();
 
 private:
     void generateThreshholding();
 
-    QImage* image;
+    QImage* threshholdImage;
     int actualThreshhold;
 
 };

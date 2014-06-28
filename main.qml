@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.1
 import QtQuick.Layouts 1.1
+import com.testTask.threshholding 1.0
 
 ApplicationWindow {
     id: applicationWindow
@@ -60,14 +61,19 @@ ApplicationWindow {
             stepSize: 1
         }
         Button { text: "OK" }
-    }
-
-    FileDialog { id: fileLoader }
+    }    
 
     statusBar: StatusBar {
         Label {
             text: image.source
             elide: Text.ElideMiddle
         }
+    }
+
+    FileDialog { id: fileLoader }
+
+    Threshholding {
+        id: threshHolding
+
     }
 }
