@@ -31,20 +31,24 @@ ApplicationWindow {
 
     Image {
         id: image
+        objectName: "test"
 
         anchors.fill: parent
         anchors.bottomMargin: rowLayout.height
         anchors.bottom: rowLayout.top
         fillMode: Image.PreserveAspectFit
-        source: fileLoader.fileUrl
+        source: "image://threshholdingImage/" + textField.text
     }
 
     RowLayout {
         id: rowLayout
+
         anchors.top: image.bottom
         width: parent.width
 
         TextField {
+            id: textField
+
             inputMask: "999"
             readOnly: true
             implicitWidth: 30
@@ -59,7 +63,6 @@ ApplicationWindow {
             minimumValue: 0
             maximumValue: 255
             stepSize: 1
-            onValueChanged: threshHolding.changeThreshholdImage(image)
         }
     }    
 
@@ -71,10 +74,4 @@ ApplicationWindow {
     }
 
     FileDialog { id: fileLoader }
-
-    Threshholding {
-        id: threshHolding
-        threshhold: slider.value
-        image: image
-    }
 }

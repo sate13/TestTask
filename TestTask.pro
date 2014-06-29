@@ -4,7 +4,7 @@ QT += qml quick widgets
 
 SOURCES += main.cpp \
     Treshholding/threshholding.cpp \
-    MainWindow/textarea.cpp
+    Treshholding/threshholdingimageprovider.cpp
 
 RESOURCES += \
     qml.qrc
@@ -17,6 +17,6 @@ include(deployment.pri)
 
 HEADERS += \
     Treshholding/threshholding.h \
-    MainWindow/textarea.h
+    Treshholding/threshholdingimageprovider.h
 
 CXXFLAGS += -std=c++11

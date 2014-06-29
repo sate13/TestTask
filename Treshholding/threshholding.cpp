@@ -46,7 +46,5 @@ void ThreshHolding::changeThreshholdImage(QImage image) {
             }
         }
     }
-    image = _outputImage;
-
     emit imageChanged();
 }
