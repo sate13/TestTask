@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    qmlRegisterType<ThreshHolding>("com.testTask.threshholding", 1, 0, "Threshholding");
+    qmlRegisterType<ThreshholdingImageProvider>("com.testTask.threshholding", 1, 0, "ImageProvider");
     engine.addImageProvider("threshholdingImage", new ThreshholdingImageProvider);
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 

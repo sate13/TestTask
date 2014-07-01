@@ -3,14 +3,25 @@
 ThreshholdingImageProvider::ThreshholdingImageProvider()
     : QQuickImageProvider(QQuickImageProvider::Pixmap) {}
 
+QString ThreshholdingImageProvider::source() {
+    return this->inputImageUrl;
+}
+
+void ThreshholdingImageProvider::setSource(const QString &url) {
+    if(this->inputImageUrl == url) { return; }
+
+    this->inputImageUrl = url;
+    emit sourceChanged();
+}
+
 QPixmap ThreshholdingImageProvider::requestPixmap(const QString& id, QSize *size, const QSize& requestedSize) {
-    QImage _outputImage = INPUT_IMAGE;
+    QImage _outputImage = QImage(inputImageUrl);
     int _threshhold = id.toInt();
 
-    for (int _w = 0; _w < INPUT_IMAGE.width(); _w++) {
-        for (int _h = 0; _h < INPUT_IMAGE.height(); _h++) {
+    for (int _w = 0; _w < _outputImage.width(); _w++) {
+        for (int _h = 0; _h < _outputImage.height(); _h++) {
             /* Berechnen des Grauwertes des Pixels */
-            int gray = qGray(INPUT_IMAGE.pixel(_w, _h));
+            int gray = qGray(_outputImage.pixel(_w, _h));
             /* Abgleich des Grauwertes mit dem Schwellen wert:
              * wenn darunter -> pixel wird weiß
              * wenn darüber -> Pixel wird schwarz */
@@ -23,10 +34,5 @@ QPixmap ThreshholdingImageProvider::requestPixmap(const QString& id, QSize *size
         }
     }
 
-    QPixmap _pixmap = QPixmap::fromImage(_outputImage);
-    return _pixmap;
-}
-
-void ThreshholdingImageProvider::setInputImage(QImage inputImage) {
-    this->INPUT_IMAGE = inputImage;
+    return QPixmap::fromImage(_outputImage);
 }

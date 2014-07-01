@@ -68,10 +68,16 @@ ApplicationWindow {
 
     statusBar: StatusBar {
         Label {
-            text: image.source
+            text: fileLoader.fileUrl
             elide: Text.ElideMiddle
         }
     }
 
-    FileDialog { id: fileLoader }
+    FileDialog {
+        id: fileLoader
+    }
+
+    ImageProvider {
+        source: fileLoader.fileUrl
+    }
 }
