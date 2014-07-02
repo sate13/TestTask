@@ -10,11 +10,11 @@ ApplicationWindow {
     height: 480
     minimumWidth: rowLayout.implicitWidth
     minimumHeight: 320
-    title: qsTr("Probeaufgabe")
+    title: "Probeaufgabe"
 
     menuBar: MenuBar {
         Menu {
-            title: qsTr("File")
+            title: "File"
 
             MenuItem {
                 text: "File Open ..."
@@ -22,7 +22,7 @@ ApplicationWindow {
             }
 
             MenuItem {
-                text: qsTr("Exit")
+                text: "Exit"
                 onTriggered: Qt.quit();
             }
         }
@@ -35,7 +35,8 @@ ApplicationWindow {
         anchors.bottomMargin: rowLayout.height
         anchors.bottom: rowLayout.top
         fillMode: Image.PreserveAspectFit
-        source: "image://threshholdingImage/" + fileLoader.fileUrl + ":*:" + textField.text
+        source: if (checkBox.checked) { fileLoader.fileUrl }
+                else { "image://threshholdingImage/" + fileLoader.fileUrl + ":*:" + textField.text }
     }
 
     RowLayout {
@@ -61,6 +62,14 @@ ApplicationWindow {
             minimumValue: 0
             maximumValue: 255
             stepSize: 1
+            enabled: if (checkBox.checked) { false }
+                     else { true }
+        }
+        
+        CheckBox {
+            id: checkBox
+            text: "Original"
+            checked: true
         }
     }    
 
@@ -71,7 +80,13 @@ ApplicationWindow {
         }
     }
 
-    FileDialog { id: fileLoader }
+    FileDialog {
+        id: fileLoader
+        onFileUrlChanged: {
+            checkBox.checked = true
+            slider.value = 0
+        }
+    }
 }
 
 
