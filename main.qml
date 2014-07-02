@@ -2,7 +2,6 @@ import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.1
 import QtQuick.Layouts 1.1
-import com.testTask.threshholding 1.0
 
 ApplicationWindow {
     id: applicationWindow
@@ -31,13 +30,12 @@ ApplicationWindow {
 
     Image {
         id: image
-        objectName: "test"
 
         anchors.fill: parent
         anchors.bottomMargin: rowLayout.height
         anchors.bottom: rowLayout.top
         fillMode: Image.PreserveAspectFit
-        source: "image://threshholdingImage/" + textField.text
+        source: "image://threshholdingImage/" + fileLoader.fileUrl + ":*:" + textField.text
     }
 
     RowLayout {
@@ -73,11 +71,7 @@ ApplicationWindow {
         }
     }
 
-    FileDialog {
-        id: fileLoader
-    }
-
-    ImageProvider {
-        source: fileLoader.fileUrl
-    }
+    FileDialog { id: fileLoader }
 }
+
+

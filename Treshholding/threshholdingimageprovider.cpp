@@ -1,22 +1,21 @@
+/**
+* @file threshholdingimageprovider.h
+* @author Marc Satkowski
+* @date 02/07/2014
+* @version 1.0
+*/
+
 #include "threshholdingimageprovider.h"
 
 ThreshholdingImageProvider::ThreshholdingImageProvider()
     : QQuickImageProvider(QQuickImageProvider::Pixmap) {}
 
-QString ThreshholdingImageProvider::source() {
-    return this->inputImageUrl;
-}
-
-void ThreshholdingImageProvider::setSource(const QString &url) {
-    if(this->inputImageUrl == url) { return; }
-
-    this->inputImageUrl = url;
-    emit sourceChanged();
-}
-
 QPixmap ThreshholdingImageProvider::requestPixmap(const QString& id, QSize *size, const QSize& requestedSize) {
-    QImage _outputImage = QImage(inputImageUrl);
-    int _threshhold = id.toInt();
+    QString _newId = id;
+    _newId.replace(0, 8, "/");
+    QStringList _list = _newId.split(":*:");
+    QImage _outputImage = QImage(_list.first());
+    int _threshhold = _list.last().toInt();
 
     for (int _w = 0; _w < _outputImage.width(); _w++) {
         for (int _h = 0; _h < _outputImage.height(); _h++) {
