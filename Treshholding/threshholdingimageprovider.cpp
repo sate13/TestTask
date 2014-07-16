@@ -18,6 +18,10 @@ QPixmap ThreshholdingImageProvider::requestPixmap(const QString& id, QSize *size
     QStringList _list = _newId.split(":*:");
     QImage _outputImage = QImage(_list.first());
     int _threshhold = _list.last().toInt();
+    
+    if(_outputImage.allGray()) {
+        _outputImage = _outputImage.convertToFormat(QImage::Format_RGB32);
+    }
 
     /* Schleifen zum Iterieren über alle Pixel des Bildes. */
     for (int _w = 0; _w < _outputImage.width(); _w++) {
